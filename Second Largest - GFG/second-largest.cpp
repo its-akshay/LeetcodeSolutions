@@ -10,22 +10,19 @@ public:
 	// Function returns the second
 	// largest elements
 	int print2largest(int arr[], int n) {
-	   int f = arr[0];
-	   int s = -1;
-	   for(int i=0;i<n;i++){
-	       if(arr[i]>f){
-	           f = arr[i];
-	       }
-	      
-	   }
-	    for(int i=0;i<n;i++){
-	        if(arr[i]>s && arr[i]!=f){
-	           s = arr[i];
-	       }
-	      
-	   }
-	   
-	   return s;
+	  int f = arr[0];
+	  int s = -1;
+	  for(int i=0;i<n;i++){
+	      if(arr[i]>f){
+	          f = arr[i];
+	      }
+	  }
+	  for(int i=0;i<n;i++){
+	      if(arr[i]>s&&arr[i]!=f){
+	         s = arr[i];
+	      }
+	  }
+	  return s;
 	}
 };
 
