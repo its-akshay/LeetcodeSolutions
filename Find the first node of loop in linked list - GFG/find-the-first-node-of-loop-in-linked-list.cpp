@@ -46,30 +46,15 @@ class Solution
      //Function to find first node if the linked list has a loop.
     int findFirstNode(Node* head)
     {
-        if(head==NULL){
-            return 0;
-        }
-        Node*fast = head;
-        Node*slow = head;
-        while(fast!=NULL&&fast->next!=NULL){
-            slow = slow->next;
-            fast = fast->next->next;
-            if(slow==fast){
-                break;
+        unordered_set<Node*>st;
+        while(head!=NULL){
+            if(st.find(head)!=st.end()){
+                return head->data;
             }
+            st.insert(head);
+            head = head->next;
         }
-        if(fast==NULL||fast->next==NULL){
-            return -1;
-        }
-        if(slow!=fast){
-            return -1;
-        }
-        slow = head;
-        while(slow!=fast){
-            slow = slow->next;
-            fast = fast->next;
-        }
-        return fast->data;
+        return -1;
     }
 };
 
