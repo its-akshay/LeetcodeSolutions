@@ -16,8 +16,10 @@ class Solution{
       
       while (left <= right) {
         if (height[left] <= height[right]) {
-          maxLeft = max(maxLeft, height[left]);
+          maxLeft = max(maxLeft, height[left]); 
+         // cout<<maxLeft<<" ";
           res += maxLeft - height[left];
+         // cout<<res<<" "<<endl;
           left++;
         } else {
           maxRight = max(maxRight, height[right]);
