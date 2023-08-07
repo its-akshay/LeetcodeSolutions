@@ -11,17 +11,35 @@ class Solution{
     //Function to return a list containing the union of the two arrays. 
     vector<int> findUnion(int arr1[], int arr2[], int n, int m)
     {
-        //Your code here
-        //return vector with correct order of elements
-        set<int>st;
-        for(int i=0;i<n;i++){
-            st.insert(arr1[i]);
-        }
-        for(int i=0;i<m;i++){
-            st.insert(arr2[i]);
-        }
-        vector<int>v(st.begin(),st.end());
-        return v;
+        int i = 0;
+        int j = 0;
+        vector<int>Union;
+        while (i < n && j < m) {
+		if (arr1[i] <= arr2[j]) // Case 1 and 2
+		{
+			if (Union.size() == 0 || Union.back() != arr1[i])
+				Union.push_back(arr1[i]);
+			i++;
+		} else // case 3
+		{
+			if (Union.size() == 0 || Union.back() != arr2[j])
+				Union.push_back(arr2[j]);
+			j++;
+		}
+	}
+	while (i < n) // IF any element left in arr1
+	{
+		if (Union.back() != arr1[i])
+			Union.push_back(arr1[i]);
+		i++;
+	}
+	while (j < m) // If any elements left in arr2
+	{
+		if (Union.back() != arr2[j])
+			Union.push_back(arr2[j]);
+		j++;
+	}
+	return Union;
     }
 };
 
