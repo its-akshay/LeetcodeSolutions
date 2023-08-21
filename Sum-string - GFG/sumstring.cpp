@@ -41,10 +41,10 @@ public:
         for (int j = 0; j < i; ++j) {
             int num1 = stoi(s.substr(j, i - j));
             
-            if (dp[j] && num1 >= 0 && num1 <= 1e9) {
-                dp[i] = true;
-                break;
-            }
+            // if (dp[j] && num1 >= 0 && num1 <= 1e9) {
+            //     dp[i] = true;
+            //     break;
+            // }
             
             for (int k = j + 1; k < i; ++k) {
                 int num2 = stoi(s.substr(k, i - k));
