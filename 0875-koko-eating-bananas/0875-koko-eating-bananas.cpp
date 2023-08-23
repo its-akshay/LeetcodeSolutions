@@ -2,7 +2,7 @@ class Solution {
 public:
 
 
-long long calculateTotalHours(vector<int> &v, int hourly) {
+long long calculateTotalHours(vector<int> v, int hourly) {
     long long int totalH = 0;
     int n = v.size();
     //find total hours:
@@ -13,7 +13,7 @@ long long calculateTotalHours(vector<int> &v, int hourly) {
 }
 
 int minEatingSpeed(vector<int> v, int h) {
-    int low = 1, high = 1000000000;
+    int low = 1, high = *max_element(v.begin(),v.end());
 
     //apply binary search:
     while (low <= high) {
