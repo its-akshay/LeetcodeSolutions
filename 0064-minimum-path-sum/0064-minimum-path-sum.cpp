@@ -8,9 +8,9 @@ public:
             for(int j=0;j<m;j++){
                 if(i==0&&j==0){
                     dp[i][j] = grid[0][0];
+                    continue;
                 }
-                else{
-                    int up = grid[i][j];
+                int up = grid[i][j];
                 if(i>0){
                     up+=dp[i-1][j];
                 }
@@ -25,7 +25,6 @@ public:
                     left+=1e9;
                 }
                 dp[i][j] = min(left,up);
-                }
             }
         }
         return dp[n-1][m-1];
