@@ -28,30 +28,34 @@ public:
 //         return x;
 //     }
     
-    int coinChange(vector<int>& coins, int amount) {
+    int coinChange(vector<int>& coins, int T) {
         int n = coins.size();
-        vector<vector<int>> dp(n,vector<int>(amount+1,0));
+        vector<int>prev(T+1);
+        vector<int>curr(T+1);
 
-        for(int i=0;i<=amount;i++){
+        for(int i=0;i<=T;i++){
             if(i%coins[0]==0){
-                dp[0][i] = i/coins[0];
+                prev[i] = i/coins[0];
             }
             else{
-                dp[0][i] = 1e9;
+                prev[i] = 1e9;
             }
         }
         for(int i=1;i<n;i++){
-            for(int j=0;j<=amount;j++){
-                int notTake = dp[i-1][j];
+            for(int j=0;j<=T;j++){
+                int notTake = prev[j];
                 int take = 1e9;
                 if(coins[i]<=j){
-                    take = 1 + dp[i][j-coins[i]];
+                    take = 1 + curr[j-coins[i]];
                 }
-                dp[i][j] = min(take,notTake);
+                curr[j] = min(take,notTake);
             }
+            prev= curr;
         }
-        int ans = dp[n-1][amount];
-        if(ans >=1e9) return -1;
-        return ans;
+        int ans = prev[T];
+        if(ans >=1e9) {
+            return -1;
+        }
+         return ans;
         }
 };
