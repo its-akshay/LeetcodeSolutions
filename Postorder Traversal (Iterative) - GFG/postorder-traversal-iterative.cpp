@@ -96,33 +96,30 @@ struct Node {
 };*/
 class Solution{
     public:
-    vector<int> postOrder(Node* root) {
-         vector<int>ans;
-       if(root==NULL){
-           return ans;
-       }
-       stack<Node*>st1;
-       //stack<Node*>st2;
-       st1.push(root);
-       while(st1.empty()==false){
-           Node*x = st1.top();
-           st1.pop();
-           //st2.push(x);
-           ans.push_back(x->data);
-           if(x->left!=NULL){
-               st1.push(x->left);
-           }
-           if(x->right!=NULL)
-           {
-               st1.push(x->right);
-           }
-       }
-    //   while(st2.empty()==false){
-    //       ans.push_back(st2.top()->data);
-    //       st2.pop();
-    //   }
-    reverse(ans.begin(),ans.end());
-       return ans;
+    vector<int> postOrder(Node* node) {
+        // code here
+       
+        vector<int>ans;
+        stack<Node*>st1,st2;
+        st1.push(node);
+        while(!st1.empty()){
+            Node* x = st1.top();
+            st1.pop();
+            st2.push(x);
+            if(x->left){
+                st1.push(x->left);
+            }
+            if(x->right){
+                st1.push(x->right);
+            }
+        }
+        
+        while(!st2.empty()){
+            Node*x = st2.top();
+            st2.pop();
+            ans.push_back(x->data);
+        }
+        return ans;
     }
 };
 
