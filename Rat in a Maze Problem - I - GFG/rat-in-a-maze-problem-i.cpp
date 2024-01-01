@@ -8,48 +8,44 @@ using namespace std;
 // } Driver Code Ends
 // User function template for C++
 
-    class Solution{
-    vector<string> ans;
-    void recursion(int i, int j, string path, vector<vector<int>> &matrix, int row, int column)
-    {
-        if(i < 0 or i >= row or j < 0 or j >= column) //checking out of bound conditions 
-        {
-            return;
-        }
-        if(matrix[i][j] == 0) //this is to avoide the recursive call on blocked or viditedd numbers
-        {
-            return;
-        }
-        
-        if(i == row-1 and j == column-1 ) //this is for answer making
-        {
-            ans.push_back(path);
-        }
-        
-        matrix[i][j] = 0;
-        
-        //up
-        recursion(i-1,j,path+'U',matrix,row,column);
-        //down
-        recursion(i+1,j,path+'D',matrix,row,column);
-        //left
-        recursion(i,j-1,path+'L',matrix,row,column);
-        //right
-        recursion(i,j+1,path+'R',matrix,row,column);
-        
-        matrix[i][j] = 1;
-        return;
-    }
-    
+class Solution{
     public:
-    vector<string> findPath(vector<vector<int>> &m, int n) 
-    {
-        string path;
-        int visited = m[0][0];
-        recursion(0,0,path,m,n,n);
-        return ans;
+    void solve(int i,int j,vector<vector<int>>a, int n,vector<string>&ans,string move,vector<vector<int>>&vis){
+        if(i==n-1&&j==n-1){
+            ans.push_back(move);
+            return;
+        }
+        if(i+1<n && !vis[i+1][j] && a[i+1][j]==1){
+            vis[i][j] = 1;
+            solve(i+1,j,a,n,ans,move+'D',vis);
+            vis[i][j] = 0;
+            
+        }
+        if(j-1>=0 && !vis[i][j-1] && a[i][j-1]==1){
+            vis[i][j] = 1;
+            solve(i,j-1,a,n,ans,move+'L',vis);
+            vis[i][j] = 0;
+        }
+        if(j+1<n && !vis[i][j+1] && a[i][j+1]==1){
+            vis[i][j] = 1;
+            solve(i,j+1,a,n,ans,move+'R',vis);
+            vis[i][j] = 0;
+        }
+        if(i-1>=0 && !vis[i-1][j] && a[i-1][j]==1){
+            vis[i][j] = 1;
+            solve(i-1,j,a,n,ans,move+'U',vis);
+            vis[i][j] = 0;
+        }
     }
-
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        vector<string>ans;
+        vector<vector<int>>vis(n,vector<int>(n,0));
+        if(m[0][0]==1){
+            solve(0,0,m,n,ans,"",vis);
+            return ans;
+        }
+    }
 };
 
     
